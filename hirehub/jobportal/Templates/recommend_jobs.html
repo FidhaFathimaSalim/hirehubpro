@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>HIREHUB</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'images/favicon.ico' %}" rel="icon">
+  <link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'css/work1.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'work' %}"  class="logo d-flex align-items-center">
+         <img src="{% static 'images/logoo.svg' %}" alt="">
+        <h1 class="sitename">HIREHUB</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+        <ol>
+          <li><a href="{% url 'work' %}">Home</a></li>
+          
+        </ol>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <div class="carousel-item active">
+          <img src="{% static 'images/hero-carousel/hero-carousel-3.jpg' %}" alt="">
+          <div class="carousel-container">
+            <h4>SKILL TRANSFORMER<br></h4>
+            <form  method="post" id="recommendation-form">
+                <label for="user_skills">Enter your skills (comma-separated):</label>
+                <input type="text" id="user_skills" name="user_skills" required>
+                <label for="required_skills">Enter required skills for the job (comma-separated):</label>
+                <input type="text" id="required_skills" name="required_skills" required>
+                <button type="submit">Get Recommendations</button>
+            </form>
+            <div id="results"></div>
+        </main>
+        <script>
+            document.getElementById('recommendation-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const userSkills = document.getElementById('user_skills').value;
+                const requiredSkills = document.getElementById('required_skills').value;
+    
+                // Simulate fetching data from the server
+                setTimeout(() => {
+                    const dummyData = [
+                        { Title: "Software Engineer", URL: "#" },
+                        { Title: "Data Scientist", URL: "#" },
+                    ];
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+                    if (dummyData.length > 0) {
+                        dummyData.forEach(job => {
+                            resultsDiv.innerHTML += `<p><strong>Title:</strong> ${job.Title}<br><a href="${job.URL}">Link</a></p>`;
+                        });
+                    } else {
+                        resultsDiv.innerHTML = '<p>No jobs found matching your input.</p>';
+                    }
+                }, 1000);
+            });
+        </script>
+        
+          </div>
+        </div><!-- End Carousel Item -->
+
+      </div>
+
+    </section><!-- /Hero Section -->
+</main>
+
+<footer id="footer" class="footer dark-background">
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="{% url 'work' %}" class="logo d-flex align-items-center">
+          <span class="sitename">HIREHUB</span>
+        </a>
+        <div class="footer-contact pt-3">
+          <p>FIDHA FATHIMA SALIM</p>
+        </div>
+        <div class="social-links d-flex mt-4">
+          <a href=""><i class="bi bi-github"></i></a>
+          <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="{% url 'work' %}">Home</a></li>
+          <li><a href="{% url 'work' %}">About us</a></li>
+          <li><a href="{% url 'work' %}">Services</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="{% url 'recommend_jobs' %}">Skill Transformer</a></li>
+          <li><a href="{% url 'hirebot' %}">Hirebot</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-12 footer-newsletter">
+        <img src="{% static 'img/android-chrome-512x512.png' %}" alt="" width="400" height="400">
+      </div>
+    </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">HIREHUB</strong> <span>All Rights Reserved</span></p>
+  </div>
+</footer>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'glightbox/js/glightbox.min.js' %}"></script>
+<!-- Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
